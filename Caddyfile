@@ -1,0 +1,6 @@
+:80 {
+
+    reverse_proxy /api/* chibisafe_server:8000
+
+    reverse_proxy chibisafe:8001
+}

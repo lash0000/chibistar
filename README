@@ -1,0 +1,14 @@
+My tutorial as a arch linux user
+
+Install chibisafe 101
+Preferred: Docker
+
+1. Create directory (chibisafe or ANY)
+2. sudo pacman -S docker docker-compose-bin
+(docker-compose seems to be broken during at this time of writing idk...)
+3. Prepare docker-compose.yml (from the chibisafe docs) and my Caddyfile
+3. docker compose up -> To run
+   docker compose down -> To shutdown 
+4. The registration is disabled so admin credentials
+User: admin
+Password: admin
