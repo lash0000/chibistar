@@ -1,3 +1,18 @@
+# This does worked too on my arch linux machine.
+# Except for file service.
+
 :80 {
-    reverse_proxy chibisafe:8001
+
+    handle /api/* {
+        reverse_proxy chibisafe_server:8000
+    }
+
+    handle /uploads/* {
+        reverse_proxy chibisafe_server:8000
+    }
+
+    handle {
+        reverse_proxy chibisafe:8001
+    }
+
 }
