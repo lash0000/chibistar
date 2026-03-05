@@ -9,6 +9,5 @@ Preferred: Docker
 3. Prepare docker-compose.yml (from the chibisafe docs) and my Caddyfile
 3. docker compose up -> To run
    docker compose down -> To shutdown 
-4. The registration is disabled so admin credentials
-User: admin
-Password: admin
+4. Public registration is disabled and so we can request an invite!!!
+5. To update: docker pull chibisafe/chibisafe:latest
