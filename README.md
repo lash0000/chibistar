@@ -1,3 +1,5 @@
+**Note:** When my computer gone it's not server shutdown it's just resting! 
+
 ## My current setup:
 
 ```
