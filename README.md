@@ -1,4 +1,5 @@
-**Note:** When my computer gone it's not server shutdown it's just resting! 
+> [!NOTE]
+> When my computer is gone, it's not a server outage — it's just resting.
 
 ## My current setup:
 
