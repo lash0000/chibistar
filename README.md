@@ -4,27 +4,18 @@
 ## My current setup:
 
 ```
-For public access:
+For public access:                                      For private access:
+  
+star-philpro-media.space (Hostinger domain)             selected device (Tailscale accessed)
+            │                                                           │
+     Cloudflare Tunnel                                              Tailscale
+            │                                                           │
+     Caddy (Web Server)                                           ux (Hostname)
+            │                                                           │
+      chibisafe (App)                                           Caddy (Web Server)
+                                                                        │
+                                                                  chibisafe (App)
 
-    star-philpro-media.space (Hostinger domain)
-        │
-    Cloudflare Tunnel
-        │
-      Caddy
-        │
-    chibisafe
-
-For private access:
-
-    tablet / laptop (Tailscale accessed)
-        │
-    Tailscale
-        │
-    ux (Hostname)
-        │
-    Caddy (Web Server)
-        │
-    chibisafe (App)
 ```
 
 ## My tutorial as a arch linux user
