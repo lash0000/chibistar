@@ -24,6 +24,7 @@ services:
       - ./uploads:/app/uploads:ro
     ports:
       - 80:80
+      - 443:443
     environment:
       - BASE_URL=":80"
     restart: unless-stopped

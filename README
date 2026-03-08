@@ -1,3 +1,29 @@
+My current setup:
+
+For public access:
+
+star-philpro-media.space
+        │
+Cloudflare Tunnel
+        │
+Caddy
+        │
+chibisafe
+
+For private access:
+
+tablet / laptop
+        │
+Tailscale
+        │
+ux
+        │
+Caddy
+        │
+chibisafe
+
+============================================
+
 My tutorial as a arch linux user
 
 Install chibisafe 101
