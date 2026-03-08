@@ -1,30 +1,30 @@
-My current setup:
+## My current setup:
 
+```
 For public access:
 
-star-philpro-media.space
+    star-philpro-media.space (Hostinger domain)
         │
-Cloudflare Tunnel
+    Cloudflare Tunnel
         │
-Caddy
+      Caddy
         │
-chibisafe
+    chibisafe
 
 For private access:
 
-tablet / laptop
+    tablet / laptop (Tailscale accessed)
         │
-Tailscale
+    Tailscale
         │
-ux
+    ux (Hostname)
         │
-Caddy
+    Caddy (Web Server)
         │
-chibisafe
+    chibisafe (App)
+```
 
-============================================
-
-My tutorial as a arch linux user
+## My tutorial as a arch linux user
 
 Install chibisafe 101
 Preferred: Docker
