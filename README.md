@@ -37,15 +37,19 @@ Preferred: Docker
 9. tailscale serve --bg http://localhost:80
 
 This will give me 
+```
 https://<hostname>.ts.net (tailnet only)
 |-- / proxy http://localhost:80
-
+```
 Port 80 is set from Chibisafe's Caddyfile and docker-compose.yml
 
 10. tailscale funnel --bg 80
 
 This will give me 
+
+```
 https://<hostname>.ts.net (Funnel on)
 |-- / proxy http://127.0.0.1:80
+```
 
 Hurray!
