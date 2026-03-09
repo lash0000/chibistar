@@ -4,17 +4,17 @@
 ## My current setup:
 
 ```
-For public access:                                      For private access:
+For public access:                                      For public access:                             For private access:                  
   
-star-philpro-media.space (Hostinger domain)             selected device (Tailscale accessed)
-            │                                                           │
-     Cloudflare Tunnel                                              Tailscale
-            │                                                           │
-     Caddy (Web Server)                                           ux (Hostname)
-            │                                                           │
-      chibisafe (App)                                           Caddy (Web Server)
-                                                                        │
-                                                                  chibisafe (App)
+star-philpro-media.space (Hostinger domain)             ux.tail997971.ts.net (Tailscale domain)        selected device (Tailscale accessed)
+            │                                                           │                                               │
+     Cloudflare Tunnel                                          Tailscale + Funnel                                  Tailscale
+            │                                                           │                                               │
+     Caddy (Web Server)                                           ux (Hostname)                                   ux (Hostname)
+            │                                                           │                                               │
+      chibisafe (App)                                           Caddy (Web Server)                              Caddy (Web Server)
+                                                                        │                                               │
+                                                                  chibisafe (App)                                chibisafe (App)
 
 ```
 
