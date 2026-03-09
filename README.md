@@ -24,10 +24,28 @@ Install chibisafe 101
 Preferred: Docker
 
 1. Create directory (chibisafe or ANY)
-2. sudo pacman -S docker docker-compose-bin
+2. sudo pacman -S docker docker-compose-bin tailscale
 (docker-compose seems to be broken during at this time of writing idk...)
 3. Prepare docker-compose.yml (from the chibisafe docs) and my Caddyfile
 3. docker compose up -> To run
    docker compose down -> To shutdown 
 4. Public registration is disabled and so we can request an invite!!!
 5. To update: docker pull chibisafe/chibisafe:latest
+6. sudo systemctl enable --now tailscaled
+7. sudo tailscale up
+8. tailscale status
+9. tailscale serve --bg http://localhost:80
+
+This will give me 
+https://<hostname>.ts.net (tailnet only)
+|-- / proxy http://localhost:80
+
+Port 80 is set from Chibisafe's Caddyfile and docker-compose.yml
+
+10. tailscale funnel --bg 80
+
+This will give me 
+https://<hostname>.ts.net (Funnel on)
+|-- / proxy http://127.0.0.1:80
+
+Hurray!
