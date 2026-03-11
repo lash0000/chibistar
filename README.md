@@ -52,4 +52,10 @@ https://<hostname>.ts.net (Funnel on)
 |-- / proxy http://127.0.0.1:80
 ```
 
-Hurray!
+Now to shutdown
+
+11. tailscale serve reset 
+12. tailscale funnel reset
+13. docker compose down
+
+Hurray! welcome to CGNAT life!
