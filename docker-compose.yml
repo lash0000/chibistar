@@ -9,9 +9,28 @@ services:
     environment:
       - TSDPROXY_AUTHKEY=tskey-auth-kNS2iWq6tk11CNTRL-LjNcKS5mmZaT2qHg2jLVZaY2MiUPd24h
 
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    expose:
+      - 80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./uploads:/app/uploads:ro
+      - ./caddy-data:/data
+      - ./caddy-config:/config
+    environment:
+      - BASE_URL=":80"
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=main
+      - tsdproxy.port=80
+      - tsdproxy.funnel=true
+
   star-api:
-    build: 
+    build:
       context: ../star
+    restart: unless-stopped
     expose:
       - 3000
     labels:
@@ -22,40 +41,20 @@ services:
 
   chibisafe:
     image: chibisafe/chibisafe:latest
+    restart: unless-stopped
     environment:
       - BASE_API_URL=http://chibisafe_server:8000
     expose:
       - 8001
-    labels:
-      - tsdproxy.enable=true
-      - tsdproxy.name=chibisafe
-      - tsdproxy.port=8001
-      - tsdproxy.funnel=true
-    restart: unless-stopped
+    depends_on:
+      - chibisafe_server
 
   chibisafe_server:
     image: chibisafe/chibisafe-server:latest
-    volumes:
-      - ./database:/app/database:rw
-      - ./uploads:/app/uploads:rw
-      - ./logs:/app/logs:rw
+    restart: unless-stopped
     expose:
       - 8000
-    labels:
-      - tsdproxy.enable=true
-      - tsdproxy.name=chibisafe_server
-      - tsdproxy.port=8000
-      - tsdproxy.funnel=true
-    restart: unless-stopped
-
-  caddy:
-    image: caddy:2-alpine
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./uploads:/app/uploads:ro
-    ports:
-      - 80:80
-      - 443:443
-    environment:
-      - BASE_URL=":80"
-    restart: unless-stopped
+      - ./database:/app/database
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
