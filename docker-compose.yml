@@ -8,12 +8,24 @@ services:
       - ./tsdproxy-data:/data
     environment:
       - TSDPROXY_AUTHKEY=tskey-auth-kNS2iWq6tk11CNTRL-LjNcKS5mmZaT2qHg2jLVZaY2MiUPd24h
+  
+  star-api:
+    build:
+      context: ../star
+    restart: unless-stopped
+    expose:
+      - 3000
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=star-api
+      - tsdproxy.port=3000
+      - tsdproxy.funnel=true
 
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
-    expose:
-      - 80
+    ports:
+      - 80:80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./uploads:/app/uploads:ro
@@ -25,18 +37,6 @@ services:
       - tsdproxy.enable=true
       - tsdproxy.name=main
       - tsdproxy.port=80
-      - tsdproxy.funnel=true
-
-  star-api:
-    build:
-      context: ../star
-    restart: unless-stopped
-    expose:
-      - 3000
-    labels:
-      - tsdproxy.enable=true
-      - tsdproxy.name=star-api
-      - tsdproxy.port=3000
       - tsdproxy.funnel=true
 
   chibisafe:
