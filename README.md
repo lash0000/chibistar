@@ -4,17 +4,17 @@
 ## My current setup:
 
 ```
-For public access:                                      For public access:                             For private access:                  
+For public access (Cloudflare DNS):                     For public access (File Service):                           For public access (API Service):                  
   
-star-philpro-media.space (Hostinger domain)             ux.tail997971.ts.net (Tailscale domain)        selected device (Tailscale accessed)
-            │                                                           │                                               │
-     Cloudflare Tunnel                                          Tailscale + Funnel                                  Tailscale
-            │                                                           │                                               │
-     Caddy (Web Server)                                           ux (Hostname)                                   ux (Hostname)
-            │                                                           │                                               │
-      chibisafe (App)                                           Caddy (Web Server)                              Caddy (Web Server)
-                                                                        │                                               │
-                                                                  chibisafe (App)                                chibisafe (App)
+star-philpro-media.space (Hostinger domain)             chibisafe.tail997971.ts.net (Tailscale domain)              star-api.tail997971.ts.net (Tailscale domain)
+            │                                                               │                                                             │
+     Cloudflare Tunnel                                              Tailscale + Funnel                                            Tailscale + Funnel
+            │                                                               │                                                             │
+     Caddy (Web Server)                                                  TSDProxy                                                     TSDProxy
+            │                                                               │                                                             │
+      chibisafe (App)                                               Caddy (Web Server)                                            Caddy (Web Server)
+                                                                            │                                                             │
+                                                                     chibisafe (App)                                             Node / Express (App)
 
 ```
 
@@ -33,8 +33,40 @@ Preferred: Docker
 5. To update: docker pull chibisafe/chibisafe:latest
 6. sudo systemctl enable --now tailscaled
 7. sudo tailscale up
-8. tailscale status
-9. tailscale serve --bg http://localhost:80
+8. To add more containers with TSDProxy you must ensure the ff:
+
+```
+  tsdproxy:
+    image: almeidapaulopt/tsdproxy:latest
+    container_name: tsdproxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./tsdproxy-data:/data
+    environment:
+      - TSDPROXY_AUTHKEY=tskey-auth-xxxxxx
+```
+
+> [!NOTE]
+> Getting your AUTHKEY will be done via (admin/settings/keys)[https://login.tailscale.com/admin/settings/keys] and set also Reusable and Ephemeral everytime that you boot up your self-hosting machine. 
+
+```
+  star-api:
+    build: 
+      context: ../star
+    expose:
+      - 3000
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=star-api
+      - tsdproxy.port=3000
+      - tsdproxy.funnel=true
+```
+
+- You must ensure that the service name is the same name for your tsdproxy.name and also for expose command configuration will be same for tsdproxy.port 
+
+9. tailscale status
+10. tailscale serve --bg http://localhost:80
 
 This will give me 
 ```
@@ -43,7 +75,7 @@ https://<hostname>.ts.net (tailnet only)
 ```
 Port 80 is set from Chibisafe's Caddyfile and docker-compose.yml
 
-10. tailscale funnel --bg 80
+11. tailscale funnel --bg 80
 
 This will give me 
 
@@ -54,8 +86,8 @@ https://<hostname>.ts.net (Funnel on)
 
 Now to shutdown
 
-11. tailscale serve reset 
-12. tailscale funnel reset
-13. docker compose down
+12. tailscale serve reset 
+13. tailscale funnel reset
+14. docker compose down
 
 Hurray! welcome to CGNAT life!
