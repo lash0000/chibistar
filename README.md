@@ -48,7 +48,7 @@ Preferred: Docker
 ```
 
 > [!NOTE]
-> Getting your AUTHKEY will be done via (admin/settings/keys)[https://login.tailscale.com/admin/settings/keys] and set also Reusable and Ephemeral everytime that you boot up your self-hosting machine. 
+> Getting your AUTHKEY will be done via [admin/settings/keys](https://login.tailscale.com/admin/settings/keys) and set also Reusable and Ephemeral everytime that you boot up your self-hosting machine. 
 
 ```
   star-api:
