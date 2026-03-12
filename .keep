@@ -1,0 +1,11 @@
+# save this for soon (Caddyfile.l4)
+
+{
+    layer4 {
+        :6432 {
+            route {
+                proxy star-philpro-postgres:5432
+            }
+        }
+    }
+}

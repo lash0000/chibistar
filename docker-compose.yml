@@ -1,10 +1,36 @@
 services:
+  tsdproxy:
+    image: almeidapaulopt/tsdproxy:latest
+    container_name: tsdproxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./tsdproxy-data:/data
+    environment:
+      - TSDPROXY_AUTHKEY=tskey-auth-kNS2iWq6tk11CNTRL-LjNcKS5mmZaT2qHg2jLVZaY2MiUPd24h
+
+  star-api:
+    build: 
+      context: ../star
+    expose:
+      - 3000
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=star-api
+      - tsdproxy.port=3000
+      - tsdproxy.funnel=true
+
   chibisafe:
     image: chibisafe/chibisafe:latest
     environment:
       - BASE_API_URL=http://chibisafe_server:8000
     expose:
       - 8001
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=chibisafe
+      - tsdproxy.port=8001
+      - tsdproxy.funnel=true
     restart: unless-stopped
 
   chibisafe_server:
@@ -15,6 +41,11 @@ services:
       - ./logs:/app/logs:rw
     expose:
       - 8000
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=chibisafe_server
+      - tsdproxy.port=8000
+      - tsdproxy.funnel=true
     restart: unless-stopped
 
   caddy:
