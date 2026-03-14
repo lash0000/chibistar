@@ -8,7 +8,21 @@ services:
       - ./tsdproxy-data:/data
     environment:
       - TSDPROXY_AUTHKEY=tskey-auth-kNS2iWq6tk11CNTRL-LjNcKS5mmZaT2qHg2jLVZaY2MiUPd24h
-  
+ 
+  ollama-brgy-api:
+    build:
+      context: ../../development/ws-monica
+    restart: unless-stopped
+    expose:
+      - 6000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=ollama-brgy-api
+      - tsdproxy.port=6000
+      - tsdproxy.funnel=true
+
   star-api:
     build:
       context: ../star

@@ -90,4 +90,9 @@ Now to shutdown
 13. tailscale funnel reset
 14. docker compose down
 
+If there are network internet changes / changed WiFi
+
+15. docker restart tsdproxy 
+Everytime we changed our network always do this so that tsdproxy will be on upstream.
+
 Hurray! welcome to CGNAT life!
