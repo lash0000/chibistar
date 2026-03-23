@@ -6,7 +6,7 @@
 ```
 For public access (Cloudflare DNS):                     For public access (File Service):                           For public access (API Service):                  
   
-star-philpro-media.space (Hostinger domain)             chibisafe.tail997971.ts.net (Tailscale domain)              star-api.tail997971.ts.net (Tailscale domain)
+star-philpro-media.space (Hostinger domain)             main.tail997971.ts.net (Tailscale domain)                   star-api.tail997971.ts.net (Tailscale domain)
             │                                                               │                                                             │
      Cloudflare Tunnel                                              Tailscale + Funnel                                            Tailscale + Funnel
             │                                                               │                                                             │
