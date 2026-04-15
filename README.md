@@ -96,4 +96,14 @@ If there are network internet changes / changed WiFi
 
 Everytime we changed our network always do this so that tsdproxy will be on upstream.
 
+## (NOTE) Everytime we add a new app to serve with docker-compose.yml 
+
+Just shutdown tailscale serve, tailscale funnel and docker compose down then run it again:
+
+16. tailscale serve --bg http://localhost:80
+17. tailscale funnel --bg 80
+18. docker compose up -d
+
+In order to make that self-hosted app available that supports tailscale will work and take note apps may vary so it depends from the self hosted platform!!!
+
 Hurray! welcome to CGNAT life!

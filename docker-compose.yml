@@ -8,7 +8,20 @@ services:
       - ./tsdproxy-data:/data
     environment:
       - TSDPROXY_AUTHKEY=tskey-auth-kNS2iWq6tk11CNTRL-LjNcKS5mmZaT2qHg2jLVZaY2MiUPd24h
- 
+
+  memos:
+    image: neosmemo/memos:stable
+    restart: unless-stopped
+    expose:
+      - 5230
+    volumes:
+      - ./memos-data:/var/opt/memos
+    labels:
+      - tsdproxy.enable=true
+      - tsdproxy.name=memos
+      - tsdproxy.port=5230
+      - tsdproxy.funnel=true
+
   ollama-brgy-api:
     build:
       context: ../../development/ws-monica
